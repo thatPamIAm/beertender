@@ -22,7 +22,7 @@ app.use('/api/v2', breweries);
 app.use('/api/v2', beers);
 
 app.get('/*', (request, response) => {
-  response.status(404).send({ error: 'Not Found' });
+  response.status(404).send({ error: 'Not found' });
 });
 
 if (!module.parent) {

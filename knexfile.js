@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/byob',
+    connection: 'postgres://localhost/ninkasi',
     useNullAsDefault: true,
     migrations: {
       directory: './db/migrations',
@@ -16,7 +16,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/byob_test',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/ninkasi_test',
     useNullAsDefault: true,
     migrations: {
       directory: './db/migrations',
