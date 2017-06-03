@@ -3,20 +3,21 @@ import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import BeerCard from './components/beercard';
 
 export default class App extends React.Component {
-  constructor(){
+  constructor() {
     super()
     this.state = {
       beers: [],
       breweries: [],
       randomBeer: [],
-      randomBrewery: {}
+      randomBrewery: {},
+      style: '',
     }
-  }
+  };
 
   componentDidMount() {
     this.grabBrewery();
     this.grabBeer();
-  }
+  };
 
   grabRandomBeer() {
     const shuffle = this.state.beers[Math.floor(Math.random()*this.state.beers.length)];
@@ -24,7 +25,8 @@ export default class App extends React.Component {
       randomBeer: shuffle
     });
     this.grabRandomBrewery(this.state.randomBeer.brewery_id)
-  }
+    this.grabRandomStyle(this.state.randomBeer.style_id)
+  };
 
   grabRandomBrewery(breweryId) {
     this.state.breweries.reduce((acc, brewery) => {
@@ -33,7 +35,7 @@ export default class App extends React.Component {
         this.setState({ randomBrewery: acc })
       }
     }, {})
-  }
+  };
 
   grabBeer() {
     fetch('http://localhost:3000/api/v2/beers')
@@ -49,7 +51,7 @@ export default class App extends React.Component {
     .catch(error => {
       error: 'grabBeer error: ', error
     })
-  }
+  };
 
   grabBrewery() {
     fetch('http://localhost:3000/api/v2/breweries')
@@ -62,12 +64,32 @@ export default class App extends React.Component {
     .catch(error => {
       error: 'grabBrewery error: ', error
     })
-  }
+  };
+
+  grabRandomStyle(id) {
+    fetch(`http://localhost:3000/api/v1/styles/${id}`)
+    .then(response => response.json())
+    .then(style => {
+      if (!style.error) {
+        const styleName = style[0].name;
+        this.setState({
+          style: styleName,
+        })
+      } else {
+        this.setState({
+          style: 'n / a'
+        });
+      }
+    })
+    .catch(error => {
+      error: 'grabBrewery error: ', error
+    })
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <BeerCard randomBeer={ this.state.randomBeer } randomBrewery={ this.state.randomBrewery }/>
+        <BeerCard randomBeer={ this.state.randomBeer } randomBrewery={ this.state.randomBrewery } randomStyle={ this.state.style } />
       </View>
     );
   }
