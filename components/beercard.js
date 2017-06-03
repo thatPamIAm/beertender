@@ -1,15 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 
-export default class BeerCard extends React.Component {
-  render() {
-    const { name, beer_id, cat_id, style_id, brewery_id } = this.props.beers;
+const BeerCard = ({ randomBeer }) => {
+  console.log(randomBeer)
+  if (!randomBeer) {
     return(
       <View>
-        <Text>{name}</Text>
-        <Text>MARISSA</Text>
-
+        <Text>It's a scam</Text>
       </View>
     )
   }
+    return(
+      <View>
+        <Text>{ randomBeer.name }</Text>
+        <Text>{ randomBeer.brewery_id }</Text>
+        <Text>{ randomBeer.style_id }</Text>
+        <Text>{ randomBeer.cat_id }</Text>
+        <Text>{ randomBeer.beer_id }</Text>
+        <Text>beer card</Text>
+      </View>
+    )
 }
+
+export default BeerCard;
