@@ -6,12 +6,13 @@ export default class App extends React.Component {
     super()
     this.state = {
       beers: [],
-      test: []
+      breweries: []
     }
   }
 
   componentDidMount() {
-    this.grabBeer()
+    this.grabBeer();
+    this.grabBrewery();
   }
 
   grabBeer() {
@@ -26,13 +27,25 @@ export default class App extends React.Component {
     .catch(error => {
       error: 'grabBeer error: ', error
     })
-    console.log(this.state.beers)
+  }
+
+  grabBrewery() {
+    fetch('http://localhost:3000/api/v2/breweries')
+    .then(response => response.json())
+    .then(brewery => {
+      this.setState({
+        breweries: brewery
+      });
+    })
+    .catch(error => {
+      error: 'grabBrewery error: ', error
+    })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.state.test}</Text>
+        <Text>{this.state.breweries}</Text>
         <Text>Jon Pam asfdm!</Text>
       </View>
     );
