@@ -5,45 +5,35 @@ export default class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      beers : 'beers'
+      beers: [],
+      test: []
     }
   }
 
-  // grabBeer() {
-  //   console.log('in grabBeer')
-  //   return <Text>no, Pam was here.</Text>
-  //   fetch('/api/v2/beers')
-  //   .then(response => response.json())
-  //   .then(json => {
-  //     const first = json[0].name;
-  //     return <Text>{ first }</Text>
-  //   })
-  //   .catch(error => {
-  //     error: 'go fuck yourself'
-  //   })
-  // }
-
+  componentDidMount() {
+    this.grabBeer()
+  }
 
   grabBeer() {
     fetch('http://localhost:3000/api/v2/beers')
     .then(response => response.json())
-    .then(json => {
-      return json.map((key, index) => {
-        console.log(key);
-        return (<Text key='index'>key.name</Text>)
-      })
+    .then(beers => {
+      this.setState({
+        test: 'suh, dude',
+        beers: beers
+      });
     })
     .catch(error => {
-      console.log('fuckkk', error)
+      error: 'grabBeer error: ', error
     })
+    console.log(this.state.beers)
   }
 
   render() {
     return (
       <View style={styles.container}>
-        { this.grabBeer() }
-        <Text>{this.state.beers}</Text>
-        <Text>Pammmmmmela is my BEsT fRIenD!</Text>
+        <Text>{this.state.test}</Text>
+        <Text>Jon Pam asfdm!</Text>
       </View>
     );
   }
