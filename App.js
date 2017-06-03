@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
+import BeerCard from './components/beercard';
 
 export default class App extends React.Component {
   constructor(){
@@ -45,6 +46,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <BeerCard beers={this.state.beers}/>
         <Text>{this.state.breweries}</Text>
         <Text>Jon Pam asfdm!</Text>
       </View>
