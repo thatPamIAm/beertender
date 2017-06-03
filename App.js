@@ -7,13 +7,21 @@ export default class App extends React.Component {
     super()
     this.state = {
       beers: [],
-      breweries: []
+      breweries: [],
+      randomBeer: []
     }
   }
 
   componentDidMount() {
     this.grabBeer();
     this.grabBrewery();
+  }
+
+  grabRandomBeer() {
+    const shuffle = this.state.beers[Math.floor(Math.random()*this.state.beers.length)];
+    this.setState({
+      randomBeer: shuffle
+    })
   }
 
   grabBeer() {
@@ -25,9 +33,13 @@ export default class App extends React.Component {
         beers: beers
       });
     })
+    .then(() => {
+      this.grabRandomBeer()
+    })
     .catch(error => {
       error: 'grabBeer error: ', error
     })
+
   }
 
   grabBrewery() {
@@ -46,9 +58,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <BeerCard beers={this.state.beers}/>
+        <BeerCard randomBeer={this.state.randomBeer}/>
         <Text>{this.state.breweries}</Text>
-        <Text>Jon Pam asfdm!</Text>
       </View>
     );
   }
