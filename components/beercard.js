@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 
-const BeerCard = ({ randomBeer }) => {
+const BeerCard = ({ randomBeer, randomBrewery }) => {
   if (!randomBeer) {
     return (
       <View>
@@ -12,7 +12,7 @@ const BeerCard = ({ randomBeer }) => {
     return (
       <View style={styles.container}>
         <Text style={styles.beer}>{ randomBeer.name }</Text>
-        <Text style={styles.brewery}>{ randomBeer.brewery_id }</Text>
+        <Text style={styles.brewery}>{ randomBrewery.name }</Text>
         <Text style={styles.data}>{ randomBeer.style_id }</Text>
         <Text style={styles.data}>{ randomBeer.cat_id }</Text>
         <Text style={styles.data}>{ randomBeer.beer_id }</Text>
