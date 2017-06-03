@@ -8,20 +8,31 @@ export default class App extends React.Component {
     this.state = {
       beers: [],
       breweries: [],
-      randomBeer: []
+      randomBeer: [],
+      randomBrewery: {}
     }
   }
 
   componentDidMount() {
-    this.grabBeer();
     this.grabBrewery();
+    this.grabBeer();
   }
 
   grabRandomBeer() {
     const shuffle = this.state.beers[Math.floor(Math.random()*this.state.beers.length)];
     this.setState({
       randomBeer: shuffle
-    })
+    });
+    this.grabRandomBrewery(this.state.randomBeer.brewery_id)
+  }
+
+  grabRandomBrewery(breweryId) {
+    this.state.breweries.reduce((acc, brewery) => {
+      if(breweryId == brewery.brewery_id){
+        acc = brewery
+        this.setState({ randomBrewery: acc })
+      }
+    }, {})
   }
 
   grabBeer() {
@@ -29,7 +40,6 @@ export default class App extends React.Component {
     .then(response => response.json())
     .then(beers => {
       this.setState({
-        test: 'suh, dude',
         beers: beers
       });
     })
@@ -58,8 +68,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <BeerCard randomBeer={this.state.randomBeer}/>
-        <Text>{this.state.breweries}</Text>
+        <BeerCard randomBeer={ this.state.randomBeer } randomBrewery={ this.state.randomBrewery }/>
       </View>
     );
   }
