@@ -56,7 +56,7 @@ export default class App extends React.Component {
     .then(response => response.json())
     .then(brewery => {
       this.setState({
-        breweries: brewery[27].name
+        breweries: brewery
       });
     })
     .catch(error => {
