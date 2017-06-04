@@ -1,13 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry } from 'react-native';
+import { StyleSheet, View, Image, Animated, Easing, Text } from 'react-native';
 
-const StartAnimation = () => {
-    return (
-      <View style={styles.container}>
-        <Text>Start Animation</Text>
-      </View>
-    )
+export default class StartAnimation extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      timePassed: false
+    };
+  }
+
+  render() {
+    setTimeout(() => { this.setState({
+      timePassed: true })}, 3000)
+      if (!this.state.timePassed) {
+        return <Image style={styles.image}  source={require('../images/beerbubbles.gif')} />
+      } else {
+        return (
+        <Text>Pammm</Text>
+        )
+      }
+  }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -16,10 +30,11 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 2,
     flex: 1,
-    backgroundColor: 'pink',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  image: {
+    height: '100%',
+    width: '100%',
+  }
 });
-
-export default StartAnimation;
