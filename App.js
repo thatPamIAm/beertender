@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import BeerCard from './components/beercard';
-import { StartAnimation } from './components/StartAnimation';
+import StartAnimation from './components/StartAnimation';
 
 export default class App extends React.Component {
   constructor() {
@@ -92,8 +92,6 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <StartAnimation />
         <BeerCard randomBeer={ this.state.randomBeer } randomBrewery={ this.state.randomBrewery } randomStyle={ this.state.style } />
-
-        { startAnimation() }
       </View>
     );
   }
