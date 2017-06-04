@@ -76,8 +76,7 @@ csv().fromFile(beerCategoriesFile)
 
 csv().fromFile(beersFile)
   .on('end_parsed', (jsonArrObj) => {
-    const splicedBeers = jsonArrObj.splice(0, 500);
-    const filteredBeers = filterBeers(splicedBeers);
+    const filteredBeers = filterBeers(jsonArrObj);
     return writeToFile('./writeData/beers.txt', filteredBeers);
   })
   .on('error', (err) => {

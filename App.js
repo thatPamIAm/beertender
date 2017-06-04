@@ -47,7 +47,7 @@ export default class App extends React.Component {
     .catch(error => {
       error: 'grabBrewery error: ', error
     })
-  };
+  }
 
   grabBeer() {
     fetch('http://localhost:3000/api/v2/beers')
