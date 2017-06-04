@@ -9,7 +9,7 @@ export default class App extends React.Component {
       beers: [],
       breweries: [],
       randomBeer: [],
-      randomBrewery: {},
+      randomBrewery: '',
       style: '',
     }
   };
@@ -28,13 +28,24 @@ export default class App extends React.Component {
     this.grabRandomStyle(this.state.randomBeer.style_id)
   };
 
-  grabRandomBrewery(breweryId) {
-    this.state.breweries.reduce((acc, brewery) => {
-      if(breweryId == brewery.brewery_id){
-        acc = brewery
-        this.setState({ randomBrewery: acc })
+  grabRandomBrewery(id) {
+    fetch(`http://localhost:3000/api/v2/breweries/${id}`)
+    .then(response => response.json())
+    .then(brewery => {
+      if (!brewery.error) {
+        const breweryName = brewery[0].name;
+        this.setState({
+          randomBrewery: breweryName,
+        })
+      } else {
+        this.setState({
+          randomBrewery: 'Brewery not avail'
+        });
       }
-    }, {})
+    })
+    .catch(error => {
+      error: 'grabBrewery error: ', error
+    })
   };
 
   grabBeer() {

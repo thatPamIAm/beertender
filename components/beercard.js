@@ -12,7 +12,7 @@ const BeerCard = ({ randomBeer, randomBrewery, randomStyle }) => {
     return (
       <View style={styles.container}>
         <Text style={styles.beer}>{ randomBeer.name }</Text>
-        <Text style={styles.brewery}>{ randomBrewery.name }</Text>
+        <Text style={styles.brewery}>{ randomBrewery }</Text>
         <Text style={styles.data}>Style: { randomStyle }</Text>
       </View>
     )
