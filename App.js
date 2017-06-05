@@ -1,7 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Badge, Icon } from 'native-base';
+
 import BeerCard from './components/beercard';
-import StartAnimation from './components/StartAnimation';
+import LoginForm from './components/Form';
+import TestBeerCard from './components/test';
 
 export default class App extends React.Component {
   constructor() {
@@ -67,23 +70,47 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View>
-        <BeerCard
-          currentBeerName={ this.state.currentBeerName }
-          currentBeerBrewery={ this.state.currentBeerBrewery }
-          currentBeerStyle={ this.state.currentBeerStyle } />
-      </View>
+      <Container style={{
+          flex: 1,
+          justifyContent: 'center',
+        }}>
+        <Header>
+          <Left>
+            <Button transparent>
+              <Title style={{ color: '#ff9900' }}>BeerTender</Title>
+            </Button>
+          </Left>
+
+          <Right>
+            <Button transparent>
+              <Icon name='beer' />
+              <Badge warning style={{ height: 20 }}>
+                <Text style={{
+                    fontSize: 10,
+                    fontWeight: 'bold',
+                    color: '#fff'
+                  }}>1</Text>
+              </Badge>
+            </Button>
+          </Right>
+        </Header>
+        <Content style={{
+            width: '90%',
+            marginTop: '5%',
+            marginLeft: '5%',
+          }}>
+          <TestBeerCard randomBeer={ this.state.randomBeer }
+                        randomBrewery={ this.state.randomBrewery }
+                        randomStyle={ this.state.style }
+          />
+        </Content>
+        <Footer style={{ height: 35, padding: 5 }}>
+          <Text style={{ fontSize: 17 }}>🍻🍺🍻</Text>
+        </Footer>
+      </Container>
+
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 AppRegistry.registerComponent('App', () => App);
