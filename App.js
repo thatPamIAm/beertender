@@ -103,7 +103,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{
+          flex: 1,
+          justifyContent: 'center',
+        }}>
         <Header>
           <Left>
             <Button transparent>
@@ -119,7 +122,11 @@ export default class App extends React.Component {
             </Button>
           </Right>
         </Header>
-        <Content>
+        <Content style={{
+            width: '96%',
+            marginTop: '7%',
+            marginLeft: '2%',
+          }}>
           <TestBeerCard randomBeer={ this.state.randomBeer }
                         randomBrewery={ this.state.randomBrewery }
                         randomStyle={ this.state.style }
@@ -128,7 +135,7 @@ export default class App extends React.Component {
         <Footer>
           <FooterTab>
             <Button full>
-              <Text>Pam || Jon || Marissa</Text>
+              <Text>🍻</Text>
             </Button>
           </FooterTab>
         </Footer>
