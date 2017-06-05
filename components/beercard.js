@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 
-const BeerCard = ({ randomBeer, randomBrewery, randomStyle }) => {
-  if (!randomBeer) {
+const BeerCard = ({ currentBeerName, currentBeerBrewery, currentBeerStyle }) => {
+  if (!currentBeerName) {
     return (
       <View>
         <Text style={styles.beer}>Where is my beer?!?</Text>
@@ -11,9 +11,9 @@ const BeerCard = ({ randomBeer, randomBrewery, randomStyle }) => {
   }
     return (
       <View style={styles.container}>
-        <Text style={styles.beer}>{ randomBeer.name }</Text>
-        <Text style={styles.brewery}>{ randomBrewery }</Text>
-        <Text style={styles.data}>Style: { randomStyle }</Text>
+        <Text style={styles.beer}>{ currentBeerName }</Text>
+        <Text style={styles.brewery}>{ currentBeerBrewery }</Text>
+        <Text style={styles.data}>Style: { currentBeerStyle }</Text>
       </View>
     )
 }
