@@ -1,7 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon } from 'native-base';
+
 import BeerCard from './components/beercard';
-import StartAnimation from './components/StartAnimation';
+import LoginForm from './components/Form';
+import TestBeerCard from './components/test';
 
 export default class App extends React.Component {
   constructor() {
@@ -100,21 +103,38 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <StartAnimation />
-        <BeerCard randomBeer={ this.state.randomBeer } randomBrewery={ this.state.randomBrewery } randomStyle={ this.state.style } />
-      </View>
+      <Container>
+        <Header>
+          <Left>
+            <Button transparent>
+              <Icon name='log-in' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>BeerTender</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name='pint' />
+            </Button>
+          </Right>
+        </Header>
+        <Content>
+          <TestBeerCard randomBeer={ this.state.randomBeer }
+                        randomBrewery={ this.state.randomBrewery }
+                        randomStyle={ this.state.style }
+          />
+        </Content>
+        <Footer>
+          <FooterTab>
+            <Button full>
+              <Text>Pam || Jon || Marissa</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 AppRegistry.registerComponent('App', () => App);
