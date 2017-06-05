@@ -29,17 +29,22 @@ export default class TestBeerCard extends Component {
               <Left>
                 <Thumbnail source={item.image} />
                 <Body>
-                  <Text>{randomBeer.name}</Text>
-                  <Text>Style: {randomStyle}</Text>
+                  <Text style={{ fontWeight: 'bold' }}>{randomBeer.name}</Text>
+                  <Text style={{ fontSize: 10 }}>Style: {randomStyle}</Text>
                 </Body>
               </Left>
             </CardItem>
             <CardItem cardBody>
-              <Image style={{ resizeMode: 'center', width: '100%', backgroundColor: item.background }} source={item.image2} />
+              <Image style={{
+                resizeMode: 'center',
+                width: '100%',
+                backgroundColor: item.background
+              }}
+              source={item.image2} />
             </CardItem>
             <CardItem>
-              <Icon name="pint" style={{ color: '#ED4A6A' }} />
-              <Text>Brewery: {randomBrewery}</Text>
+              <Icon name="beer" style={{ color: '#ED4A6A' }} />
+              <Text style={{ fontSize: 12 }}>Brewery: {randomBrewery}</Text>
             </CardItem>
           </Card>
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Badge, Icon } from 'native-base';
 
 import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
@@ -110,34 +110,35 @@ export default class App extends React.Component {
         <Header>
           <Left>
             <Button transparent>
-              <Icon name='log-in' />
+              <Title style={{ color: '#ff9900' }}>BeerTender</Title>
             </Button>
           </Left>
-          <Body>
-            <Title>BeerTender</Title>
-          </Body>
+
           <Right>
             <Button transparent>
-              <Icon name='pint' />
+              <Icon name='beer' />
+              <Badge warning style={{ height: 20 }}>
+                <Text style={{
+                    fontSize: 10,
+                    fontWeight: 'bold',
+                    color: '#fff'
+                  }}>1</Text>
+              </Badge>
             </Button>
           </Right>
         </Header>
         <Content style={{
-            width: '96%',
-            marginTop: '7%',
-            marginLeft: '2%',
+            width: '90%',
+            marginTop: '5%',
+            marginLeft: '5%',
           }}>
           <TestBeerCard randomBeer={ this.state.randomBeer }
                         randomBrewery={ this.state.randomBrewery }
                         randomStyle={ this.state.style }
           />
         </Content>
-        <Footer>
-          <FooterTab>
-            <Button full>
-              <Text>🍻</Text>
-            </Button>
-          </FooterTab>
+        <Footer style={{ height: 35, padding: 5 }}>
+          <Text style={{ fontSize: 17 }}>🍻🍺🍻</Text>
         </Footer>
       </Container>
     );
