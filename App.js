@@ -5,6 +5,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
 import SwipeCard from './components/SwipeCard';
+import NavigatorIOSApp from './components/test';
 
 export default class App extends React.Component {
   constructor() {
@@ -39,7 +40,7 @@ export default class App extends React.Component {
     });
   }
 
-  getBeer() {
+  getBeer(num) {
     fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
     .then(response => response.json())
     .then(currentBeer => {
@@ -49,7 +50,7 @@ export default class App extends React.Component {
       this.setState({ currentBeerName: name });
     })
     .catch(error => {
-      console.error('error: ', error);
+      console.error('getBeer ERROR: ', error);
     });
     const incrementCounter = this.state.counter += 1;
     this.setState({
@@ -58,20 +59,25 @@ export default class App extends React.Component {
   }
 
   getBeerStyle(id) {
+    console.log(id, ' getBeerStyle id')
     fetch(`http://localhost:3000/api/v1/styles/${id}`)
     .then(response => response.json())
-    .then(styleArray => {
-      const style = styleArray[0].name;
-      if (!style.error) {
-        this.setState({ currentBeerStyle: style });
+    .then(style => {
+      if (style.error) {
+        console.log('uh oh, there is an error')
+        this.setState({
+          currentBeerStyle: 'Marissa Style',
+        })
       } else {
-        this.setState({ currentBeerStyle: 'n/a' });
+        this.setState({
+          currentBeerStyle: style[0].name
+        });
       }
     })
     .catch(error => {
-      console.error('error: ', error);
-    });
-  }
+      error: 'grabStyle error: ', error
+    })
+  };
 
   render() {
     return (
@@ -104,11 +110,11 @@ export default class App extends React.Component {
         marginTop: '5%',
         marginLeft: '5%',
       }}>
-          <SwipeCard randomBeer={ this.state.currentBeerName }
-                        randomBrewery={ this.state.currentBeerBrewery }
-                        randomStyle={ this.state.currentBeerStyle }
-                        handleSwipe={(e) => this.getBeer(e)}
-          />
+      <SwipeCard randomBeer={ this.state.currentBeerName }
+                    randomBrewery={ this.state.currentBeerBrewery }
+                    randomStyle={ this.state.currentBeerStyle }
+                    getBeer={ this.getBeer.bind(this) }
+      />
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
           <Text style={{ fontSize: 17 }}>🍻🍺🍻</Text>
