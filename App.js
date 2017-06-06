@@ -13,12 +13,13 @@ export default class App extends React.Component {
     this.state = {
       currentBeerName: '',
       currentBeerStyle: '',
-      currentBeerBrewery: ''
+      currentBeerBrewery: '',
+      counter: 1,
     };
   }
 
   componentDidMount() {
-    this.getBeer(2);
+    this.getBeer();
   }
 
   getBeerBrewery(id) {
@@ -40,6 +41,7 @@ export default class App extends React.Component {
   }
 
   getBeer() {
+
     fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
     .then(response => response.json())
     .then(currentBeer => {
@@ -54,11 +56,11 @@ export default class App extends React.Component {
     const incrementCounter = this.state.counter += 1;
     this.setState({
       counter: incrementCounter
-
     });
   }
 
   getBeerStyle(id) {
+    console.log(id, ' getBeerStyle id')
     fetch(`http://localhost:3000/api/v1/styles/${id}`)
     .then(response => response.json())
     .then(style => {
@@ -77,8 +79,6 @@ export default class App extends React.Component {
       error: 'grabStyle error: ', error
     })
   };
-
-
 
   render() {
     return (
@@ -116,7 +116,6 @@ export default class App extends React.Component {
                     randomStyle={ this.state.currentBeerStyle }
                     getBeer={ this.getBeer.bind(this) }
       />
-
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
           <Text style={{ fontSize: 17 }}>🍻🍺🍻</Text>
