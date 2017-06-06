@@ -9,9 +9,9 @@ const breweriesFile = './csv/breweries.csv';
 const writeToFile = (path, data) => {
   fs.writeFile(path, JSON.stringify(data, null, 2), (err) => {
     if (err) {
-      console.error('Error:', err.message);
+      return null;
     } else {
-      console.log(`Successful Write to ${path}`);
+      return null;
     }
   });
 };
@@ -55,11 +55,8 @@ csv().fromFile(beerStylesFile)
     return writeToFile('./writeData/styles.txt', jsonArrObj);
   })
   .on('error', (err) => {
-    console.log('An Error Has Occured');
-    console.log(err);
   })
   .on('done', () => {
-    console.log('Scraping Complete');
   });
 
 csv().fromFile(beerCategoriesFile)
@@ -67,11 +64,8 @@ csv().fromFile(beerCategoriesFile)
     return writeToFile('./writeData/categories.txt', jsonArrObj);
   })
   .on('error', (err) => {
-    console.log('An Error Has Occured');
-    console.log(err);
   })
   .on('done', () => {
-    console.log('Scraping Complete');
   });
 
 csv().fromFile(beersFile)
@@ -80,11 +74,8 @@ csv().fromFile(beersFile)
     return writeToFile('./writeData/beers.txt', filteredBeers);
   })
   .on('error', (err) => {
-    console.log('An Error Has Occured');
-    console.log(err);
   })
   .on('done', () => {
-    console.log('Scraping Complete');
   });
 
 csv().fromFile(breweriesFile)
@@ -93,9 +84,6 @@ csv().fromFile(breweriesFile)
     return writeToFile('./writeData/breweries.txt', filteredBreweries);
   })
   .on('error', (err) => {
-    console.log('An Error Has Occured');
-    console.log(err);
   })
   .on('done', () => {
-    console.log('Scraping Complete');
   });

@@ -26,9 +26,7 @@ app.get('/*', (request, response) => {
 });
 
 if (!module.parent) {
-  app.listen(app.get('port'), () => {
-    console.log(`Server is listening on ${(app.get('port'))}`);
-  });
+  app.listen(app.get('port'));
 }
 
 module.exports = app;
