@@ -14,7 +14,7 @@ export default class App extends React.Component {
       currentBeerName: '',
       currentBeerStyle: '',
       currentBeerBrewery: '',
-      counter: 1
+      counter: 1,
     };
   }
 
@@ -40,7 +40,7 @@ export default class App extends React.Component {
     });
   }
 
-  getBeer(dasbeer) {
+  getBeer() {
 
     fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
     .then(response => response.json())
@@ -51,7 +51,7 @@ export default class App extends React.Component {
       this.setState({ currentBeerName: name });
     })
     .catch(error => {
-      console.error('getBeer ERROR: ', error, dasbeer);
+      console.error('getBeer ERROR: ', error);
     });
     const incrementCounter = this.state.counter += 1;
     this.setState({
