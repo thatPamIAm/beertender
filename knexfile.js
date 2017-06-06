@@ -17,13 +17,13 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/ninkasi_test',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/ninkasi',
     useNullAsDefault: true,
     migrations: {
       directory: './db/migrations',
     },
     seeds: {
-      directory: './db/seeds/test',
+      directory: './db/seeds/dev',
     },
   },
 
