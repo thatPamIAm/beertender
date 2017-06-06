@@ -37,5 +37,6 @@ module.exports = {
     seeds: {
       directory: './db/seeds/dev',
     },
+    url: process.env.DATABASE_URL
   },
 };
