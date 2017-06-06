@@ -11,7 +11,6 @@ export default class SwipeCard extends Component {
 
     next() {
     this.props.getBeer();
-
   }
 
   previous() {
