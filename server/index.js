@@ -24,7 +24,7 @@ app.use('/api/v2', beers);
 app.use(express.static('/'));
 
 app.get('/', (request, response) => {
-  fs.readFile(`${__dirname}/index.html`, (err, file) => {
+  fs.readFile(`${__dirname}/App.js`, (err, file) => {
     response.send(file);
   });
 });
