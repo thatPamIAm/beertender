@@ -12,6 +12,7 @@ module.exports = {
     seeds: {
       directory: './db/seeds/dev',
     },
+    url: 'http://localhost:3000',
   },
 
   test: {

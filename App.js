@@ -7,6 +7,11 @@ import LoginForm from './components/Form';
 import SwipeCard from './components/SwipeCard';
 import NavigatorIOSApp from './components/test';
 
+const environment = process.env.NODE_ENV || 'development';
+const configuration = require('./knexfile')[environment];
+
+const url = configuration.url;
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -23,7 +28,7 @@ export default class App extends React.Component {
   }
 
   getBeerBrewery(id) {
-    fetch(`http://localhost:3000/api/v2/breweries/${id}`)
+    fetch(`${url}/api/v2/breweries/${id}`)
     .then(response => response.json())
     .then(breweryArray => {
       const brewery = breweryArray[0].name;
@@ -41,8 +46,7 @@ export default class App extends React.Component {
   }
 
   getBeer() {
-
-    fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
+    fetch(`${url}/api/v2/beers/${this.state.counter}`)
     .then(response => response.json())
     .then(currentBeer => {
       const { brewery_id, style_id, name } = currentBeer[0];
@@ -60,8 +64,7 @@ export default class App extends React.Component {
   }
 
   getBeerStyle(id) {
-    console.log(id, ' getBeerStyle id')
-    fetch(`http://localhost:3000/api/v1/styles/${id}`)
+    fetch(`${url}/api/v1/styles/${id}`)
     .then(response => response.json())
     .then(style => {
       if (style.error) {
@@ -101,7 +104,7 @@ export default class App extends React.Component {
                   fontSize: 10,
                   fontWeight: 'bold',
                   color: '#fff'
-                }}>1</Text>
+                }}>27</Text>
             </Badge>
           </Button>
         </Right>
