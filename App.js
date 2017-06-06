@@ -67,7 +67,7 @@ export default class App extends React.Component {
       if (style.error) {
         console.log('uh oh, there is an error')
         this.setState({
-          currentBeerStyle: 'Marissa Style',
+          currentBeerStyle: 'n / a',
         })
       } else {
         this.setState({
