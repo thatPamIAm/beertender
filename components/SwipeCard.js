@@ -5,14 +5,22 @@ import { Container, Icon, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Lef
 const randomColor = require('randomcolor');
 
 export default class SwipeCard extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   next() {
     console.log('next');
-    console.log(this.props.handleSwipe);
+    this.getBeer();
+
   }
 
   previous() {
-    console.log('previous');
+    console.log('werking previous')
+  }
+
+  getBeer(){
+    this.props.getBeer(27)
   }
 
   render() {
