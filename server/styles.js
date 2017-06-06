@@ -6,8 +6,6 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 
-const checkAuth = require('./checkAuth');
-
 styles.get('/styles', (request, response) => {
   database('styles').select()
     .then((allStyles) => {
@@ -33,7 +31,7 @@ styles.get('/styles/:id', (request, response) => {
     });
 });
 
-styles.post('/styles', checkAuth, (request, response) => {
+styles.post('/styles', (request, response) => {
   const { name, category_id } = request.body;
   if (!name || !category_id) { return response.status(422).send({ error: 'Missing content from post' }); }
 
@@ -50,7 +48,7 @@ styles.post('/styles', checkAuth, (request, response) => {
     });
 });
 
-styles.patch('/styles/:id', checkAuth, (request, response) => {
+styles.patch('/styles/:id', (request, response) => {
   const { id } = request.params;
   const expectedRequest = ['name', 'style_id', 'category_id'];
   const isMissing = expectedRequest.some(param => request.body[param]);

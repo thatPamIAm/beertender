@@ -6,8 +6,6 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../knexfile')[environment];
 const database = require('knex')(configuration);
 
-const checkAuth = require('./checkAuth');
-
 categories.get('/categories', (request, response) => {
   database('categories').select()
     .then((allCategories) => {
@@ -48,7 +46,7 @@ categories.get('/categories/:id/styles', (request, response) => {
     });
 });
 
-categories.post('/categories', checkAuth, (request, response) => {
+categories.post('/categories', (request, response) => {
   const { name } = request.body;
   if (!name) { return response.status(422).send({ error: 'Missing content from post' }); }
 
@@ -65,7 +63,7 @@ categories.post('/categories', checkAuth, (request, response) => {
     });
 });
 
-categories.delete('/categories/:id', checkAuth, (request, response) => {
+categories.delete('/categories/:id', (request, response) => {
   const { id } = request.params;
 
   database('categories').where('category_id', id).select()
@@ -92,7 +90,7 @@ categories.delete('/categories/:id', checkAuth, (request, response) => {
     });
 });
 
-categories.put('/categories/:id', checkAuth, (request, response) => {
+categories.put('/categories/:id', (request, response) => {
   const { id } = request.params;
   const expectedRequest = ['category_id', 'name'];
   const isMissing = expectedRequest.every(param => request.body[param]);

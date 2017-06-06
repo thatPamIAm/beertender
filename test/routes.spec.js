@@ -295,7 +295,6 @@ describe('API Routes', () => {
     it('should be able to POST a new category to the categories database', (done) => {
       chai.request(server)
       .post('/api/v1/categories')
-      .set('Authorization', process.env.TOKEN)
       .send({ name: 'Indian Pale Ales' })
       .end((error, response) => {
         response.should.have.status(201);
@@ -311,7 +310,6 @@ describe('API Routes', () => {
     it('should return an error if a POST request to categories is made without correct request data', (done) => {
       chai.request(server)
       .post('/api/v1/categories')
-      .set('Authorization', process.env.TOKEN)
       .send({})
       .end((error, response) => {
         response.should.have.status(422);
@@ -326,7 +324,6 @@ describe('API Routes', () => {
     it('should be able to POST a new style to the styles database', (done) => {
       chai.request(server)
       .post('/api/v1/styles')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'Traditional IPA',
         category_id: 10,
@@ -347,7 +344,6 @@ describe('API Routes', () => {
     it('should return an error if a POST request to styles is made without correct request data', (done) => {
       chai.request(server)
       .post('/api/v1/styles')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'Traditional IPA',
       })
@@ -364,7 +360,6 @@ describe('API Routes', () => {
     it('should be able to POST a new brewery to the breweries database', (done) => {
       chai.request(server)
       .post('/api/v2/breweries')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'Russian River',
         address1: '725 4th St',
@@ -394,7 +389,6 @@ describe('API Routes', () => {
     it('should return an error if a POST request to breweries is made without correct request data', (done) => {
       chai.request(server)
       .post('/api/v2/breweries')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'Ballast Point',
         city: 'Temecula',
@@ -415,7 +409,6 @@ describe('API Routes', () => {
     it('should be able to POST a new beers to the beers database', (done) => {
       chai.request(server)
       .post('/api/v2/beers')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'Pliny the Elder',
         cat_id: 10,
@@ -438,7 +431,6 @@ describe('API Routes', () => {
     it('should return an error if a POST request to beers is made without correct request data', (done) => {
       chai.request(server)
       .post('/api/v2/beers')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: '2x4',
         cat_id: 10,
@@ -456,17 +448,16 @@ describe('API Routes', () => {
     it('should be able to DELETE a specific category', (done) => {
       chai.request(server)
       .get('/api/v1/categories')
-      .set('Authorization', process.env.TOKEN)
       .end((error, response) => {
         response.body.length.should.equal(11);
         chai.request(server)
         .delete('/api/v1/categories/11')
-        .set('Authorization', process.env.TOKEN)
+
         .end((error, response) => {
           response.should.have.status(204);
           chai.request(server)
           .get('/api/v1/categories')
-          .set('Authorization', process.env.TOKEN)
+
           .end((error, response) => {
             response.body.length.should.equal(10);
             done();
@@ -478,7 +469,6 @@ describe('API Routes', () => {
     it('should respond with a 404 warning if a DELETE is attempted without correct params', (done) => {
       chai.request(server)
       .delete('/api/v1/categories/12')
-      .set('Authorization', process.env.TOKEN)
       .end((error, response) => {
         response.should.have.status(404);
         response.body.should.deep.equal({ error: 'Invalid Category ID' });
@@ -491,17 +481,16 @@ describe('API Routes', () => {
     it('should be able to DELETE a specific beer', (done) => {
       chai.request(server)
       .get('/api/v2/beers')
-      .set('Authorization', process.env.TOKEN)
       .end((error, response) => {
         response.body.length.should.equal(500);
         chai.request(server)
         .delete('/api/v2/beers/111')
-        .set('Authorization', process.env.TOKEN)
+
         .end((error, response) => {
           response.should.have.status(204);
           chai.request(server)
           .get('/api/v2/beers')
-          .set('Authorization', process.env.TOKEN)
+
           .end((error, response) => {
             response.body.length.should.equal(499);
             done();
@@ -513,7 +502,6 @@ describe('API Routes', () => {
     it('should respond with a 404 warning if a DELETE is attempted without correct params', (done) => {
       chai.request(server)
       .delete('/api/v2/beers/1000')
-      .set('Authorization', process.env.TOKEN)
       .end((error, response) => {
         response.should.have.status(404);
         response.body.should.deep.equal({ error: 'Invalid Beer ID' });
@@ -526,7 +514,6 @@ describe('API Routes', () => {
     it('should be able to PATCH a specific brewery', (done) => {
       chai.request(server)
       .get('/api/v2/breweries')
-      .set('Authorization', process.env.TOKEN)
       .end((error, response) => {
         response.body[0].name.should.equal('(512) Brewing Company');
         response.body[0].address1.should.equal('407 Radam, F200');
@@ -536,7 +523,7 @@ describe('API Routes', () => {
         response.body[0].country.should.equal('United States');
         chai.request(server)
         .patch('/api/v2/breweries/1')
-        .set('Authorization', process.env.TOKEN)
+
         .send({
           name: 'New Brewery Name',
           address1: 'New Address',
@@ -557,7 +544,6 @@ describe('API Routes', () => {
     it('should respond with a 422 warning if a PATCH is attempted without correct params', (done) => {
       chai.request(server)
       .patch('/api/v2/breweries/1')
-      .set('Authorization', process.env.TOKEN)
       .send({
         invaildKey: 'This won\'t work Brewery',
       })
@@ -571,7 +557,6 @@ describe('API Routes', () => {
     it('should respond with a 404 warning if a PATCH is attempted with an incorrect Brewery ID', (done) => {
       chai.request(server)
       .patch('/api/v2/breweries/10000')
-      .set('Authorization', process.env.TOKEN)
       .send({
         state: 'Colorado',
       })
@@ -585,7 +570,6 @@ describe('API Routes', () => {
     it('should respond with an error if a PATCH attempts to add a brewery_id that already exists', (done) => {
       chai.request(server)
       .patch('/api/v2/breweries/1')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'New Brewery Name',
         address1: 'New Brewery Address',
@@ -604,14 +588,14 @@ describe('API Routes', () => {
   //   it('should be able to PATCH a specific beer style', (done) => {
   //     chai.request(server)
   //     .get('/api/v1/styles')
-  //     .set('Authorization', process.env.TOKEN)
+  //
   //     .end((error, response) => {
   //       response.body[0].name.should.equal('Classic English-Style Pale Ale');
   //       response.body[0].style_id.should.equal(1);
   //       response.body[0].category_id.should.equal(1);
   //       chai.request(server)
   //       .patch('/api/v1/styles/1')
-  //       .set('Authorization', process.env.TOKEN)
+  //
   //       .send({
   //         name: 'New Classic Style of Pale Ale',
   //         category_id: 11,
@@ -629,7 +613,6 @@ describe('API Routes', () => {
     it('should respond with a 422 warning if a PATCH is attempted without correct params', (done) => {
       chai.request(server)
       .patch('/api/v1/styles/90')
-      .set('Authorization', process.env.TOKEN)
       .send({
         invaildKey: 'This style will not work',
       })
@@ -643,7 +626,6 @@ describe('API Routes', () => {
     it('should respond with a 404 warning if a PATCH is attempted with an incorrect Beer Style ID', (done) => {
       chai.request(server)
       .patch('/api/v1/styles/500')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'New Classic Style of Pale Ale',
         style_id: 11,
@@ -658,7 +640,6 @@ describe('API Routes', () => {
     it('should respond with an error if a PATCH attempts to add a style_id that already exists', (done) => {
       chai.request(server)
       .patch('/api/v1/styles/1')
-      .set('Authorization', process.env.TOKEN)
       .send({
         name: 'New Classic Style of Pale Ale',
         style_id: 11,
@@ -676,7 +657,6 @@ describe('API Routes', () => {
     it('should be able to PUT a specific beer', (done) => {
       chai.request(server)
       .get('/api/v2/beers')
-      .set('Authorization', process.env.TOKEN)
       .end((error, response) => {
         response.body[0].beer_id.should.equal(1);
         response.body[0].name.should.equal('Hocus Pocus');
@@ -685,7 +665,7 @@ describe('API Routes', () => {
         response.body[0].brewery_id.should.equal(812);
         chai.request(server)
         .put('/api/v2/beers/1')
-        .set('Authorization', process.env.TOKEN)
+
         .send({
           beer_id: 1,
           name: 'New Beer Name',
@@ -708,7 +688,6 @@ describe('API Routes', () => {
     it('should respond with a 422 warning if a PUT is attempted without correct params', (done) => {
       chai.request(server)
       .put('/api/v2/beers/32')
-      .set('Authorization', process.env.TOKEN)
       .send({
         beer_id: 32,
         cat_id: 2,
@@ -725,7 +704,6 @@ describe('API Routes', () => {
     it('should respond with a 404 warning if a PUT is attempted with an incorrect Beer ID', (done) => {
       chai.request(server)
       .put('/api/v2/beers/52111')
-      .set('Authorization', process.env.TOKEN)
       .send({
         beer_id: 52111,
         name: 'New Beer Name',
@@ -743,7 +721,6 @@ describe('API Routes', () => {
     it('should respond with an error if a PUT attempts to add a beer_id that already exists', (done) => {
       chai.request(server)
       .put('/api/v2/beers/1')
-      .set('Authorization', process.env.TOKEN)
       .send({
         beer_id: 10,
         name: 'New Beer Name',
@@ -764,13 +741,13 @@ describe('API Routes', () => {
     // it('should be able to PUT a specific category', (done) => {
     //   chai.request(server)
     //   .get('/api/v1/categories')
-    //   .set('Authorization', process.env.TOKEN)
+
     //   .end((error, response) => {
     //     response.body[0].category_id.should.equal(1);
     //     response.body[0].name.should.equal('British Ale');
     //     chai.request(server)
     //     .put('/api/v1/categories/1')
-    //     .set('Authorization', process.env.TOKEN)
+    //
     //     .send({
     //       category_id: 1,
     //       name: 'New Category Name',
@@ -787,7 +764,6 @@ describe('API Routes', () => {
     it('should respond with a 422 warning if a PUT is attempted without correct params', (done) => {
       chai.request(server)
       .put('/api/v1/categories/5')
-      .set('Authorization', process.env.TOKEN)
       .send({
         category_id: 5,
       })
@@ -801,7 +777,6 @@ describe('API Routes', () => {
     it('should respond with a 404 warning if a PUT is attempted with an incorrect Category ID', (done) => {
       chai.request(server)
       .put('/api/v1/categories/500')
-      .set('Authorization', process.env.TOKEN)
       .send({
         category_id: 500,
         name: 'New Category Name',
@@ -816,7 +791,6 @@ describe('API Routes', () => {
     it('should respond with an error if a PUT attempts to add a category_id that already exists', (done) => {
       chai.request(server)
       .put('/api/v1/categories/1')
-      .set('Authorization', process.env.TOKEN)
       .send({
         category_id: 6,
         name: 'New Category Name',
