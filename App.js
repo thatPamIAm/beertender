@@ -4,7 +4,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 
 import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
-import TestBeerCard from './components/test';
+import SwipeCard from './components/SwipeCard';
 
 export default class App extends React.Component {
   constructor() {
@@ -12,7 +12,8 @@ export default class App extends React.Component {
     this.state = {
       currentBeerName: '',
       currentBeerStyle: '',
-      currentBeerBrewery: ''
+      currentBeerBrewery: '',
+      counter: 1
     }
   };
 
@@ -39,7 +40,8 @@ export default class App extends React.Component {
   }
 
   getBeer() {
-    fetch('http://localhost:3000/api/v2/beers/1')
+    console.log('made it')
+    fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
     .then(response => response.json())
     .then(currentBeer => {
       const { brewery_id, style_id, name } = currentBeer[0]
@@ -50,6 +52,11 @@ export default class App extends React.Component {
     .catch(error => {
       console.error('error: ', error)
     })
+    let incrementCounter = this.state.counter++
+    this.setState({
+      counter : incrementCounter
+    })
+    console.log(this.state.counter)
   };
 
   getBeerStyle(id) {
@@ -99,9 +106,10 @@ export default class App extends React.Component {
             marginTop: '5%',
             marginLeft: '5%',
           }}>
-          <TestBeerCard randomBeer={ this.state.randomBeer }
-                        randomBrewery={ this.state.randomBrewery }
-                        randomStyle={ this.state.style }
+          <SwipeCard randomBeer={ this.state.currentBeerName }
+                        randomBrewery={ this.state.currentBeerBrewery }
+                        randomStyle={ this.state.currentBeerStyle }
+                        handleSwipe={() => this.getBeer(e)}
           />
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
