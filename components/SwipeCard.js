@@ -11,7 +11,7 @@ export default class SwipeCard extends Component {
 
     next() {
     console.log('next');
-    this.getBeer();
+    this.props.getBeer();
 
   }
 
