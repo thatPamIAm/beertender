@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Content, Form, Item, Input,Label, Title } from 'native-base';
+import { Container, Content, Form, Item, Input, Label, Title } from 'native-base';
 
 export default class LoginForm extends Component {
   render() {

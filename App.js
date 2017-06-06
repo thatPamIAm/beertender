@@ -8,26 +8,26 @@ import SwipeCard from './components/SwipeCard';
 
 export default class App extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       currentBeerName: '',
       currentBeerStyle: '',
       currentBeerBrewery: '',
       counter: 1
-    }
-  };
+    };
+  }
 
   componentDidMount() {
     this.getBeer();
-  };
+  }
 
   getBeerBrewery(id) {
     fetch(`http://localhost:3000/api/v2/breweries/${id}`)
     .then(response => response.json())
     .then(breweryArray => {
-      const brewery = breweryArray[0].name
+      const brewery = breweryArray[0].name;
       if (!brewery.error) {
-        this.setState({ currentBeerBrewery: brewery })
+        this.setState({ currentBeerBrewery: brewery });
       } else {
         this.setState({
           currentBeerBrewery: 'Brewery not avail'
@@ -35,52 +35,50 @@ export default class App extends React.Component {
       }
     })
     .catch(error => {
-      console.error('error: ', error)
-    })
+      console.error('error: ', error);
+    });
   }
 
   getBeer() {
-    console.log('made it')
     fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
     .then(response => response.json())
     .then(currentBeer => {
-      const { brewery_id, style_id, name } = currentBeer[0]
-      this.getBeerBrewery(brewery_id)
-      this.getBeerStyle(style_id)
+      const { brewery_id, style_id, name } = currentBeer[0];
+      this.getBeerBrewery(brewery_id);
+      this.getBeerStyle(style_id);
       this.setState({ currentBeerName: name });
     })
     .catch(error => {
-      console.error('error: ', error)
-    })
-    let incrementCounter = this.state.counter++
+      console.error('error: ', error);
+    });
+    const incrementCounter = this.state.counter += 1;
     this.setState({
-      counter : incrementCounter
-    })
-    console.log(this.state.counter)
-  };
+      counter: incrementCounter
+    });
+  }
 
   getBeerStyle(id) {
     fetch(`http://localhost:3000/api/v1/styles/${id}`)
     .then(response => response.json())
     .then(styleArray => {
-      const style = styleArray[0].name
+      const style = styleArray[0].name;
       if (!style.error) {
-        this.setState({ currentBeerStyle: style })
+        this.setState({ currentBeerStyle: style });
       } else {
-        this.setState({ currentBeerStyle: 'n/a' })
+        this.setState({ currentBeerStyle: 'n/a' });
       }
     })
     .catch(error => {
-      console.error('error: ', error)
-    })
-  };
+      console.error('error: ', error);
+    });
+  }
 
   render() {
     return (
       <Container style={{
-          flex: 1,
-          justifyContent: 'center',
-        }}>
+        flex: 1,
+        justifyContent: 'center',
+      }}>
         <Header>
           <Left>
             <Button transparent>
@@ -93,23 +91,23 @@ export default class App extends React.Component {
               <Icon name='beer' />
               <Badge warning style={{ height: 20 }}>
                 <Text style={{
-                    fontSize: 10,
-                    fontWeight: 'bold',
-                    color: '#fff'
-                  }}>1</Text>
-              </Badge>
-            </Button>
-          </Right>
-        </Header>
-        <Content style={{
-            width: '90%',
-            marginTop: '5%',
-            marginLeft: '5%',
-          }}>
+                  fontSize: 10,
+                  fontWeight: 'bold',
+                  color: '#fff'
+                }}>1</Text>
+            </Badge>
+          </Button>
+        </Right>
+      </Header>
+      <Content style={{
+        width: '90%',
+        marginTop: '5%',
+        marginLeft: '5%',
+      }}>
           <SwipeCard randomBeer={ this.state.currentBeerName }
                         randomBrewery={ this.state.currentBeerBrewery }
                         randomStyle={ this.state.currentBeerStyle }
-                        handleSwipe={() => this.getBeer(e)}
+                        handleSwipe={(e) => this.getBeer(e)}
           />
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
