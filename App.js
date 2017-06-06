@@ -12,13 +12,12 @@ export default class App extends React.Component {
     this.state = {
       currentBeerName: '',
       currentBeerStyle: '',
-      currentBeerBrewery: '',
-      counter: 1
+      currentBeerBrewery: ''
     };
   }
 
   componentDidMount() {
-    this.getBeer();
+    this.getBeer(2);
   }
 
   getBeerBrewery(id) {
@@ -39,8 +38,8 @@ export default class App extends React.Component {
     });
   }
 
-  getBeer() {
-    fetch(`http://localhost:3000/api/v2/beers/${this.state.counter}`)
+  getBeer(num) {
+    fetch(`http://localhost:3000/api/v2/beers/${num}`)
     .then(response => response.json())
     .then(currentBeer => {
       const { brewery_id, style_id, name } = currentBeer[0];
@@ -49,29 +48,28 @@ export default class App extends React.Component {
       this.setState({ currentBeerName: name });
     })
     .catch(error => {
-      console.error('error: ', error);
-    });
-    const incrementCounter = this.state.counter += 1;
-    this.setState({
-      counter: incrementCounter
+      console.error('pams error ', error);
     });
   }
 
   getBeerStyle(id) {
-    fetch(`http://localhost:3000/api/v1/styles/${id}`)
+   fetch(`http://localhost:3000/api/v1/styles/${id}`)
     .then(response => response.json())
-    .then(styleArray => {
-      const style = styleArray[0].name;
-      if (!style.error) {
-        this.setState({ currentBeerStyle: style });
-      } else {
-        this.setState({ currentBeerStyle: 'n/a' });
-      }
-    })
-    .catch(error => {
-      console.error('error: ', error);
-    });
-  }
+    .then(style => {
+      if (style.error) {
+       this.setState({
+         currentBeerStyle: 'n/a',
+       })
+     } else {
+       this.setState({
+         currentBeerStyle: style[0].name
+       });
+     }
+   })
+   .catch(error => {
+     error: 'grabBrewery error: ', error
+   })
+ };
 
   render() {
     return (
@@ -107,7 +105,7 @@ export default class App extends React.Component {
           <SwipeCard randomBeer={ this.state.currentBeerName }
                         randomBrewery={ this.state.currentBeerBrewery }
                         randomStyle={ this.state.currentBeerStyle }
-                        handleSwipe={(e) => this.getBeer(e)}
+                        getBeer={ this.getBeer.bind(this) }
           />
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
