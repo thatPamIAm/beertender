@@ -5,7 +5,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
 import SwipeCard from './components/SwipeCard';
-import NavigatorIOSApp from './components/test';
+// import NavigatorIOSApp from './components/test';
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];

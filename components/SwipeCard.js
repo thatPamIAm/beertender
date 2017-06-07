@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, Icon, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Right, Body } from 'native-base';
-
+import SpinLoad from './SpinLoad'
 const randomColor = require('randomcolor');
 
 export default class SwipeCard extends Component {
@@ -23,6 +23,11 @@ export default class SwipeCard extends Component {
   }
 
   render() {
+    if(!this.props.randomBeer || !this.props.randomBrewery || !this.props.randomStyle) {
+      return (
+        <SpinLoad />
+      )
+    }
     const { randomBeer, randomBrewery, randomStyle, handleSwipe } = this.props;
     const cardInfo = [
       {
