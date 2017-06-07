@@ -5,7 +5,6 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
 import SwipeCard from './components/SwipeCard';
-// import NavigatorIOSApp from './components/test';
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
@@ -20,11 +19,20 @@ export default class App extends React.Component {
       currentBeerStyle: '',
       currentBeerBrewery: '',
       counter: 1,
+      favorites: 0,
     };
   }
 
   componentDidMount() {
     this.getBeer();
+  }
+
+  addFavorite() {
+    console.log('made it here ', this.state.favorites)
+    const favTotal = this.state.favorites += 1;
+    this.setState({
+      favorites: favTotal
+    })
   }
 
   getBeerBrewery(id) {
@@ -55,7 +63,7 @@ export default class App extends React.Component {
       this.setState({ currentBeerName: name });
     })
     .catch(error => {
-      console.error('getBeer ERROR: ', error);
+      error: 'getBeer ERROR: ', error
     });
     const incrementCounter = this.state.counter += 1;
     this.setState({
@@ -68,7 +76,6 @@ export default class App extends React.Component {
     .then(response => response.json())
     .then(style => {
       if (style.error) {
-        console.log('uh oh, there is an error')
         this.setState({
           currentBeerStyle: 'n / a',
         })
@@ -104,7 +111,7 @@ export default class App extends React.Component {
                   fontSize: 10,
                   fontWeight: 'bold',
                   color: '#fff'
-                }}>27</Text>
+                }}>{ this.state.favorites }</Text>
             </Badge>
           </Button>
         </Right>
@@ -118,6 +125,7 @@ export default class App extends React.Component {
                     randomBrewery={ this.state.currentBeerBrewery }
                     randomStyle={ this.state.currentBeerStyle }
                     getBeer={ this.getBeer.bind(this) }
+                    addFavorite={ this.addFavorite.bind(this) }
       />
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
