@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Badge, Icon } from 'native-base';
 
-import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
 import SwipeCard from './components/SwipeCard';
 
