@@ -6,7 +6,6 @@ import BeerCard from './components/beercard';
 import LoginForm from './components/Form';
 import SwipeCard from './components/SwipeCard';
 // import NavigatorIOSApp from './components/test';
-import SpinLoad from './components/SpinLoad';
 
 export default class App extends React.Component {
   constructor() {
@@ -117,7 +116,6 @@ export default class App extends React.Component {
                     randomStyle={ this.state.currentBeerStyle }
                     getBeer={ this.getBeer.bind(this) }
       />
-        <SpinLoad />
         </Content>
         <Footer style={{ height: 35, padding: 5 }}>
           <Text style={{ fontSize: 17 }}>🍻🍺🍻</Text>
