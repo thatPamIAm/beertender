@@ -34,7 +34,7 @@ export default class SwipeCard extends Component {
         brewery: randomBrewery,
         name: randomBeer,
         style: randomStyle,
-        image: require('../images/beerbubbles2.gif'),
+        image: require('../images/beerbubbles.gif'),
         image2: require('../images/beer.png'),
         background: randomColor(),
       }
