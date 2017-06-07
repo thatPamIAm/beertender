@@ -28,11 +28,10 @@ export default class App extends React.Component {
   }
 
   addFavorite() {
-    console.log('made it here ', this.state.favorites)
     const favTotal = this.state.favorites += 1;
     this.setState({
       favorites: favTotal
-    })
+    });
   }
 
   getBeerBrewery(id) {
@@ -49,7 +48,7 @@ export default class App extends React.Component {
       }
     })
     .catch(error => {
-      console.error('error: ', error);
+      console.error('getBrewery error: ', error);
     });
   }
 
@@ -63,7 +62,7 @@ export default class App extends React.Component {
       this.setState({ currentBeerName: name });
     })
     .catch(error => {
-      error: 'getBeer ERROR: ', error
+      console.error('getBeer error: ', error);
     });
     const incrementCounter = this.state.counter += 1;
     this.setState({
@@ -78,7 +77,7 @@ export default class App extends React.Component {
       if (style.error) {
         this.setState({
           currentBeerStyle: 'n / a',
-        })
+        });
       } else {
         this.setState({
           currentBeerStyle: style[0].name
