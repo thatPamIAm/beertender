@@ -37,6 +37,6 @@ module.exports = {
     seeds: {
       directory: './db/seeds/dev',
     },
-    url: process.env.DATABASE_URL
+    url: 'https://beertender1611.herokuapp.com/'
   },
 };

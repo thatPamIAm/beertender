@@ -21,6 +21,14 @@ app.use('/api/v1', styles);
 app.use('/api/v2', breweries);
 app.use('/api/v2', beers);
 
+app.use(express.static('/'));
+
+app.get('/', (request, response) => {
+  fs.readFile(`${__dirname}/App.js`, (err, file) => {
+    response.send(file);
+  });
+});
+
 app.get('/*', (request, response) => {
   response.status(404).send({ error: 'Not found' });
 });

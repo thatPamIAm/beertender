@@ -79,9 +79,9 @@ export default class App extends React.Component {
       }
     })
     .catch(error => {
-      error: 'grabStyle error: ', error
-    })
-  };
+      console.error('grabStyle error: ', error);
+    });
+  }
 
   render() {
     return (
