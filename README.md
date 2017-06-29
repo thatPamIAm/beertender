@@ -1,5 +1,9 @@
 # Beertender
 
+[Beertender in action](https://youtu.be/0BCIqf0b2xM)
+
+[![Beertender in action](http://i.imgur.com/WYqUilt.png)](https://youtu.be/0BCIqf0b2xM)
+
 ### Background
 
 For the final project at Turing School of Software & Design, we were randomly assigned into groups to work with an already existing API from another student. We were tasked with the wire-framing, design, and build-out of the front-facing interface.
