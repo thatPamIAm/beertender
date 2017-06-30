@@ -8,11 +8,11 @@
 
 For the final project at Turing School of Software & Design, we were randomly assigned into groups to work with an already existing API from another student. We were tasked with the wire-framing, design, and build-out of the front-facing interface.
 
-For this project, we were assigned an API that utilizes the [Open Beer DB](https://openbeerdb.com/) (all routes listed at end of of the README). We decided early on that our focus would be on creating a pleasing UI that would allow users to "swipe" random beers populated from the database, much like current dating apps Tinder and Bumble. Because of this, we made the decision to work with React Native for our front-end. As a group, we also strongly desired to work with React Native since it is not currently covered in the curriculum at Turing School.
+For this project, we were assigned an API that utilizes the [Open Beer DB](https://openbeerdb.com/) (all routes listed at end of of the README). We decided early on that we wanted to focus on creating a pleasing UI that would allow users to "swipe" random beers populated from the database, much like the dating apps Tinder and Bumble. Because of this, we made the decision to work with React Native for our front-end. As a group, we also strongly desired to work with React Native since it is not currently covered in the curriculum at Turing School.
 
 ### Reflection
 
-This proved to be a challenging project to take on for a variety of different reasons. Much of our struggle during the early stage of this project was in learning brand new technologies (React Native and Expo XDE) and implementing this project with a pre-existing backend API. Beyond the initial setup/learning curve, we also ran into difficulties in working with our inherited backend. This was largely due to the many-to-many relationships that were set up in the inherited code  - they simply did not configure well with what we were looking to display on the front-end, which forced us to make three calls for a single beer to be displayed.
+This proved to be a challenging project to take on for a variety of different reasons. Much of our struggle during the early stage of this project was in learning brand new technologies and tools (namely React Native and Expo XDE) and implementing this project with a pre-existing backend API. Beyond the initial setup/learning curve, we also ran into difficulties in working with our inherited backend. This was largely due to the many-to-many relationships that were set up in the inherited code  - they simply did not configure well with what we were looking to display on the front-end, which forced us to make three calls every time a single beer is displayed.
 
 ### Future Iterations
 
@@ -20,9 +20,9 @@ Although we made our MVP for this project, there is still much left to do.
 
 Next phase will include:
 
-- Rebuilding the BE from scratch utilizing the Brewery DB API since the previous API has not been updated in several years and was missing some features of the beers we wished to showcase.
+- Rebuilding the BE from scratch utilizing the Brewery DB API. The Open Beer DB has not been updated in several years and was missing some features of the beers we wished to showcase.
 - Change the database schema to account for what we are looking to display on the FE.
-- Add features to help guide user with swiping left vs right (and what that entails).
+- Add features to help guide users with swiping left vs right (and what that entails).
 
 ### Database used
 
