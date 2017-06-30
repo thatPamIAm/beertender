@@ -12,7 +12,7 @@ For this project, we were assigned an API that utilizes the [Open Beer DB](https
 
 ### Reflection
 
-This proved to be a challenging project to take on for a variety of different reasons. Much of our struggle during the early stage of this project was in learning brand new technologies and tools (namely React Native and Expo XDE) and implementing this project with a pre-existing backend API. Beyond the initial setup/learning curve, we also ran into difficulties in working with our inherited backend. This was largely due to the many-to-many relationships that were set up in the inherited code  - they simply did not configure well with what we were looking to display on the front-end, which forced us to make three calls every time a single beer is displayed.
+This proved to be a challenging project to take on for a variety of different reasons. Much of our struggle during the early stage of this project was in learning brand new technologies and tools (namely React Native and Expo XDE) and implementing this project with a pre-existing backend API. Beyond the initial setup/learning curve, we also ran into difficulties in working with our inherited backend. This was largely due to the many-to-many relationships that were set up in the inherited code  - they simply did not configure well with what we were looking to display on the front-end, which forced us to make three calls every time we wanted to display a single beer.
 
 ### Future Iterations
 
